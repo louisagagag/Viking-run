@@ -14,7 +14,7 @@ public class VikingController : MonoBehaviour
     Rigidbody rb;
     Animator animator;
     bool onGround = true, run = false;
-    int degree = 1000;
+    public int degree = 1000;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,50 +36,36 @@ public class VikingController : MonoBehaviour
             }
             else if (degree % 4 == 1)
             {
+                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.right;
+            }
+            else if (degree % 4 == 2)
+            {
+                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.back;
+            }
+            else if (degree % 4 == 3)
+            {
                 transform.localPosition += movingSpeed * Time.deltaTime * Vector3.left;
             }
-            else if (degree % 4 == 2)
-            {
-                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.back;
-            }
-            else if (degree % 4 == 3)
-            {
-                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.right;
-            }
 
             run = true;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
 
-            if (degree % 4 == 0)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
-            }
-            else if (degree % 4 == 1)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, -180.0f, 0.0f);
-            }
-            else if (degree % 4 == 2)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, -270.0f, 0.0f);
-            }
-            else if (degree % 4 == 3)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-            }
-            degree++;
+            transform.Rotate(new Vector3(0.0f, -90.0f, 0.0f));
+            degree--;
             run = true;
         }
+        Debug.Log(degree);
         if (Input.GetKey(KeyCode.S))
         {
-            if (degree % 4 == 0)
+            if (degree %4== 0)
             {
                 transform.localPosition += movingSpeed * Time.deltaTime * Vector3.back;
             }
             else if (degree % 4 == 1)
             {
-                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.right;
+                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.left;
             }
             else if (degree % 4 == 2)
             {
@@ -87,30 +73,16 @@ public class VikingController : MonoBehaviour
             }
             else if (degree % 4 == 3)
             {
-                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.left;
+                transform.localPosition += movingSpeed * Time.deltaTime * Vector3.right;
             }
             run = true;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (degree % 4 == 0)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
-            }
-            else if (degree % 4 == 1)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-            }
-            else if (degree % 4 == 2)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
-            }
-            else if (degree % 4 == 3)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-            }
-            
-            degree--;
+         
+                transform.Rotate ( new Vector3(0.0f, 90.0f, 0.0f));
+            degree++;
+
             run = true;
         }
         animator.SetBool("Run", run);
